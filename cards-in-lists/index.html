@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Cards in Lists</title>
+    <!-- Пару небольших библиотек со стилями -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.min.css">
+
+    <link rel="stylesheet" href="css/cards-lists.css">
+  </head>
+
+  <body>
+
+    <!--
+    Application как app/views/layouts/application,
+    {{outlet}} работает как "= yield" в ROR
+    -->
+    <script type="text/x-handlebars" data-template-name="application">
+      <header>
+        <h1 class="app-name left">Interactive lists with card inside</h1>
+      </header>
+
+      <!--/* Ссылки href, мини меню*/-->
+      <div>
+        {{#link-to 'index'}}Index{{/link-to}}
+        <span> | </span>
+        {{#link-to 'lists'}}Lists{{/link-to}}
+        <span> | </span>
+        {{#link-to 'about'}}About{{/link-to}}
+      </div>
+
+      {{outlet}}
+    </script>
+
+    <!-- Шаблон страницы index, который попадает в {{outlet}} по запросу url-->
+    <script type="text/x-handlebars" data-template-name="index">
+      <h3>Index page</h3>
+    </script>
+
+    <!-- Шаблон страницы about, который попадает в {{outlet}} по запросу url-->
+    <script type="text/x-handlebars" data-template-name="about">
+      <h3>About this project ...</h3>
+    </script>
+
+    <!-- Шаблон страницы lists, который попадает в {{outlet}} по запросу url-->
+    <script type="text/x-handlebars" data-template-name="lists">
+      <h3>Lists with card inside</h3>
+
+      <section id="lists-container" class="lists-container">
+        <div class="row">
+
+          <!--/* 
+            Вывод данных в цикле.
+            Проходит по всем контроллерам и добавляет контроллер list
+          */-->
+          {{#each controller itemController="list"}}
+            <section class="list list-inline">
+              <h1>{{listName}}</h1>
+
+              <!--/*
+                Цикл в цикле
+                выводим card для конкретного list
+                и добовляем для card контроллер
+              */-->
+              {{#each card in cards itemController="card"}}
+                <div class="card">
+
+                  {{#if card.isEditing}}
+                    {{view "edit-card"}}
+                  {{else}}
+
+                    <label>{{card.description}}</label>
+                    <!--/* Редактирование card */-->
+                    <div class="edit-small edit-card hand" {{action "editCard" }}></div>
+                    <!--/* Удаление card card-controller.js */-->
+                    <div {{action "deleteCard" card}} class="remove-small remove-card hand"></div>
+
+                  {{/if}}
+                </div>
+              {{/each}}
+
+              <!--/* Удаление списка list-controller.js */-->
+              <a {{action "removeList"}} class="hand">
+                <div class="remove remove-list"></div>
+              </a>
+
+              <!--/* Создание карточки list-controller.js */-->
+              <section class="new-card">
+                {{input type="text" value=cardDescription action="createCard" class="card-input" placeholder="New Card"}}
+              </section>
+
+            </section>
+          {{/each}}
+          <section class="list new-list list-inline">
+            <!--/*
+            Поле для создание новой записи в модели List,
+            action - createList работает через контроллер js/controllers/lists-controller.js
+            */-->
+            {{input type="text" value=listName action="createList" id="new-list" class="list-input" placeholder="New List"}}
+          </section>
+        </div>
+      </section>
+
+    </script>
+
+    <!-- Срабатывает как {{outlet}} по типу "= yield" в ROR. Рендерится на место {{view "edit-card"}} -->
+    <script type="text/x-handlebars" data-template-name="editCardView">
+      <!--/*  обновление card card-controller.js */-->
+      {{input type="text" value=card.description action="updateCard"}}
+      {{view 'select' class="select-list" contentBinding="card.controllers.lists.content" optionValuePath="content.id" prompt='Select List...' optionLabelPath="content.listName" selectionBinding="card.newList"}}
+    </script>
+
+    <!-- Подключение jquery-->
+    <script src="js/libs/jquery-1.11.1.js"></script>
+    <!-- Подключение шаблонизатора / Handlebars (template system) -->
+    <script src="js/libs/handlebars-v1.3.0.js"></script>
+    <!-- Подключение фреймворка -->
+    <script src="js/libs/ember-1.8.1.js"></script>
+    <!-- Библиотека позволяющая работать с базой данных -->
+    <script src="js/libs/ember-data-v1.0.0-beta.11.js"></script>
+
+    <!-- Файл инициализации проекта -->
+    <script src="js/app.js"></script>
+
+    <!-- Фаил с роутами -->
+    <script src="js/router.js"></script>
+
+    <!-- Подключение моделей -->
+    <script src="js/models/list.js"></script>
+    <script src="js/models/card.js"></script>
+
+    <!-- Файл для получения данных из бд -->
+    <script src="js/routes/lists-route.js"></script>
+
+    <!-- Подключение контроллера lists, для модели списков-->
+    <script src="js/controllers/lists-controller.js"></script>
+
+    <!-- Подключение контроллера list, для обьекта, т.е для конкретного списка -->
+    <script src="js/controllers/list-controller.js"></script>
+
+    <!-- Подключение контроллера card -->
+    <script src="js/controllers/card-controller.js"></script>
+
+    <!-- Подключение view для {{view "edit-card"}}/editCardView -->
+    <script src="js/views/edit-card-view.js"></script>
+
+  </body>
+
+</html>

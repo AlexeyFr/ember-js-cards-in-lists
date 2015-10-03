@@ -1,0 +1,157 @@
+/* BASE */
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background-color: #205c7e;
+  color: #fff;
+  margin: 0;
+  overflow: hidden;
+  padding: .2em;
+}
+
+input {
+  border-radius: 4px;
+}
+
+/* END BASE */
+
+.app-name {
+  color: #fff;
+  font-family: 'Yesteryear', cursive;
+  font-size: 2em;
+  font-weight: 500;
+  margin: 0;
+  text-indent: .5em;
+  padding: 0;
+}
+
+.list {
+  background-color: #e3e3e3;
+  border: 1px solid #999;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: top;
+  width: 200px;
+  padding: 10px;
+}
+
+.list h1 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.list input {
+  margin-bottom: 0;
+}
+
+.list.new-list {
+  background-color: #628da4;
+}
+
+.list-inline {
+  display: inline-block;
+}
+
+.lists-container {
+  position: relative;
+  padding: 20px;
+}
+
+.remove {
+  background: url( ../img/x.svg);
+  height: 15px;
+  width: 15px;
+}
+
+.remove-small {
+  background: url( ../img/x_sm.svg);
+  height: 10px;
+  width: 10px;
+}
+
+.remove-list {
+  color: #205c7e;
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-weight: 700;
+  margin: 6px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.remove-card {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+
+.no-display {
+  display: none;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+  margin: 10px 0;
+  position: relative;
+  padding: 20px;
+}
+
+.edit {
+  background: url( ../img/pen_alt_stroke.svg);
+  height: 15px;
+  width: 15px;
+}
+
+.edit-small {
+  background: url( ../img/pen_alt_stroke_sm.svg);
+  height: 10px;
+  width: 10px;
+}
+
+.edit-card {
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 3px;
+}
+
+.edit:hover {
+  background: url( ../img/pen_alt_fill.svg);
+}
+
+.edit-small:hover {
+  background: url( ../img/pen_alt_fill_sm.svg);
+}
+
+.card:hover {
+  border-color: #205c7e;
+}
+
+.hand {
+  cursor: pointer;
+}
+
+input.search {
+  margin-bottom: 0;
+  margin-right: 10px;
+  margin-top: 4px;
+  width: 200px;
+}
+
+.select-list {
+  margin: 10px 0 0 0;
+}
+
+.header-link {
+  color: #fff;
+  vertical-align: middle;
+}
+
+.header-link:hover {
+  color: #e3e3e3;
+}

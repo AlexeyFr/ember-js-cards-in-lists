@@ -1,0 +1,1 @@
+Simple project "cards-in-lists" on ember js
